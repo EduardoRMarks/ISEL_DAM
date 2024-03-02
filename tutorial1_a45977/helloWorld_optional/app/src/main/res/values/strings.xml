@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">helloWorld_optional</string>
+    <string name="systemInfo">
+        Manufacturer: android.os.Build \n
+        Model: %s \n
+        Brand: %s \n
+        Type: %s \n
+        User: %s \n
+        Base: %s \n
+        Incremental: %s \n
+        SDK: %s \n
+        Version Code: %s \n
+        Display: %s \n
+    </string>
+</resources>
