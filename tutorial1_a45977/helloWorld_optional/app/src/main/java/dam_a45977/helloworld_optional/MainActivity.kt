@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
                 "Base: ${Build.VERSION_CODES.BASE}\n" +
                 "Incremental: ${Build.VERSION.INCREMENTAL}\n" +
                 "SDK: ${Build.VERSION.SDK}\n" +
-                "Version Code: ${Build.VERSION.CODENAME}\n" +
+                "Version Code: ${Build.VERSION.RELEASE}\n" +
                 "Display: ${Build.DISPLAY}\n"
 
         deviceInfo.text = deviceInfoAux
