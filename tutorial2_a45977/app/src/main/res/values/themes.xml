@@ -1,8 +1,35 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.CoolWeatherAPP" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Primary -->
+        <item name="colorPrimary">@color/background_light</item>
+        <item name="colorPrimaryVariant">@color/button_light</item>
+        <item name="colorOnPrimary">@color/text_light</item>
+
+        <!-- Secondary -->
+        <item name="colorSecondary">@color/background_dark</item>
+        <item name="colorSecondaryVariant">@color/button_dark</item>
+        <item name="colorOnSecondary">@color/text_dark</item>
+
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+
+    </style>
+
+    <style name="Theme.Day" parent="Theme.CoolWeatherAPP">
+        <item name="android:windowBackground">@drawable/daytime_vertical</item>
+    </style>
+
+    <style name="Theme.Day.Land" parent="Theme.CoolWeatherAPP">
+        <item name="android:windowBackground">@drawable/daytime_horizontal</item>
+    </style>
+
+    <style name="Theme.Night" parent="Theme.CoolWeatherAPP">
+        <item name="android:windowBackground">@drawable/nighttime_vertical</item>
+    </style>
+
+    <style name="Theme.Night.Land" parent="Theme.CoolWeatherAPP">
+        <item name="android:windowBackground">@drawable/nighttime_horizontal</item>
     </style>
 
     <style name="Theme.CoolWeatherAPP" parent="Base.Theme.CoolWeatherAPP" />
