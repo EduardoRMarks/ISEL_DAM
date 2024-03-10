@@ -2,12 +2,16 @@ package dam_a45977.coolweatherapp
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +30,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setDayNightTheme(day)
+        setStatusBarColor(day)
+    }
+
+    private fun setStatusBarColor(day: Boolean) {
+        val window: Window = window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        if (day){
+            window.statusBarColor = ContextCompat.getColor(this, R.color.button_light)
+        } else {
+            window.statusBarColor = ContextCompat.getColor(this, R.color.button_dark)
+        }
     }
 
     @SuppressLint("ResourceAsColor")
