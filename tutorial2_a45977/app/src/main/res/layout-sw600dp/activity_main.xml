@@ -9,43 +9,45 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="270dp"
+        android:layout_height="270dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/clear_day" />
 
     <Button
         android:id="@+id/update_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="165dp"
+        android:layout_height="70dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="@string/button"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/weatherConstraintLayout"
-        android:layout_width="419dp"
-        android:layout_height="292dp"
+        android:layout_width="910dp"
+        android:layout_height="483dp"
+        android:layout_marginTop="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.61"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.39">
 
         <TextView
             android:id="@+id/longitude_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="150dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="68dp"
             android:text="@string/longitude"
-            android:textSize="22sp"
+            android:textSize="55sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -54,21 +56,21 @@
             android:id="@+id/latitude_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="16dp"
             android:text="@string/latitude"
             android:textAlignment="center"
-            android:textSize="22sp"
+            android:textSize="55sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/latitude"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="15dp"
             android:ems="10"
             android:inputType="text"
             android:lineSpacingExtra="16sp"
@@ -79,10 +81,10 @@
 
         <EditText
             android:id="@+id/longitude"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="140dp"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="40dp"
             android:ems="10"
             android:inputType="text"
             android:lineSpacingExtra="16sp"
@@ -92,10 +94,10 @@
 
         <ImageView
             android:id="@+id/wind_icon"
-            android:layout_width="49dp"
-            android:layout_height="46dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/latitude"
             app:srcCompat="@drawable/wind_black" />
@@ -104,10 +106,10 @@
             android:id="@+id/wind_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="56dp"
             android:text="@string/wind_title"
-            android:textSize="22sp"
+            android:textSize="55sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/wind_icon"
             app:layout_constraintTop_toBottomOf="@+id/latitude" />
@@ -116,36 +118,24 @@
             android:id="@+id/wind_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="32dp"
             android:text="@string/wind_value_text"
-            android:textSize="30sp"
+            android:textSize="70sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/wind_title"
             app:layout_constraintTop_toBottomOf="@+id/longitude" />
-
-        <TextView
-            android:id="@+id/wind_gust_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:text="@string/wind_gust_text"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/wind_title"
-            app:layout_constraintTop_toBottomOf="@+id/wind_value" />
 
         <TextView
             android:id="@+id/km_h1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:text="@string/km_h"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.052"
             app:layout_constraintStart_toEndOf="@+id/wind_value"
             app:layout_constraintTop_toBottomOf="@+id/longitude" />
 
@@ -154,24 +144,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:text="@string/wind"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.054"
             app:layout_constraintStart_toEndOf="@+id/wind_value"
             app:layout_constraintTop_toBottomOf="@+id/km_h1" />
+
+        <TextView
+            android:id="@+id/wind_gust_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/wind_gust_text"
+            android:textSize="70sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wind_title"
+            app:layout_constraintTop_toBottomOf="@+id/wind_value" />
 
         <TextView
             android:id="@+id/km_h2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="12dp"
             android:text="@string/km_h"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.052"
             app:layout_constraintStart_toEndOf="@+id/wind_gust_value"
             app:layout_constraintTop_toBottomOf="@+id/wind" />
 
@@ -180,70 +184,69 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:text="@string/gusts"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.064"
             app:layout_constraintStart_toEndOf="@+id/wind_gust_value"
             app:layout_constraintTop_toBottomOf="@+id/km_h2" />
-
-        <ImageView
-            android:id="@+id/humidity_icon"
-            android:layout_width="49dp"
-            android:layout_height="46dp"
-            android:layout_marginTop="104dp"
-            android:layout_marginEnd="52dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/humidity_black" />
 
         <TextView
             android:id="@+id/pressure_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="92dp"
             android:text="@string/pressure_text"
-            android:textSize="22sp"
+            android:textSize="55sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/wind_title" />
+            app:layout_constraintTop_toBottomOf="@+id/humidity_icon" />
 
         <TextView
             android:id="@+id/pressure_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="92dp"
             android:text="@string/pressure_value"
-            android:textSize="22sp"
+            android:textSize="55sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.026"
+            app:layout_constraintHorizontal_bias="0.016"
             app:layout_constraintStart_toEndOf="@+id/pressure_title"
-            app:layout_constraintTop_toBottomOf="@+id/wind_title" />
+            app:layout_constraintTop_toBottomOf="@+id/humidity_icon" />
 
         <TextView
             android:id="@+id/humidity_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginEnd="40dp"
             android:text="@string/humidity_text"
-            android:textSize="22sp"
+            android:textSize="55sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/humidity_icon" />
+
+        <ImageView
+            android:id="@+id/humidity_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="136dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/longitude"
+            app:srcCompat="@drawable/humidity_black" />
 
         <TextView
             android:id="@+id/humidity_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="56dp"
+            android:layout_marginEnd="144dp"
             android:text="@string/humidity_value"
-            android:textSize="30sp"
+            android:textSize="70sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/humidity_title" />
@@ -253,81 +256,83 @@
         android:id="@+id/temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:text="@string/temp"
         android:textAlignment="center"
-        android:textSize="44sp"
+        android:textSize="120sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.088"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/min_max" />
-
-    <TextView
-        android:id="@+id/thermal_sensation_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="124dp"
-        android:text="@string/ts_text_title"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/temp"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/min_max"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/min_max_text"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/time_value" />
-
-    <TextView
-        android:id="@+id/thermal_sensation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="124dp"
-        android:text="@string/ts_text"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/thermal_sensation_title"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/loc_text"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/location_icon"
-        app:layout_constraintTop_toBottomOf="@+id/temp" />
 
     <ImageView
         android:id="@+id/location_icon"
-        android:layout_width="22dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="332dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/temp"
         app:srcCompat="@drawable/location_black" />
 
     <TextView
-        android:id="@+id/time_value"
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/loc_text"
+        android:textSize="47sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/location_icon"
+        app:layout_constraintTop_toBottomOf="@+id/temp" />
+
+    <TextView
+        android:id="@+id/min_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/min_max_text"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/thermal_sensation_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="168dp"
+        android:text="@string/ts_text_title"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/temp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/thermal_sensation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/time_value"
-        android:textSize="26sp"
+        android:layout_marginTop="168dp"
+        android:text="@string/ts_text"
+        android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/thermal_sensation_title"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/time_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="188dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/time_value"
+        android:textSize="62sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/weatherConstraintLayout"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
