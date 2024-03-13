@@ -76,8 +76,8 @@
             android:layout_marginTop="5dp"
             android:ems="10"
             android:inputType="text"
-            android:lineSpacingExtra="34sp"
             android:textAlignment="center"
+            android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/latitude_title" />
@@ -90,8 +90,8 @@
             android:layout_marginEnd="40dp"
             android:ems="10"
             android:inputType="text"
-            android:lineSpacingExtra="34sp"
             android:textAlignment="center"
+            android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/longitude_title" />

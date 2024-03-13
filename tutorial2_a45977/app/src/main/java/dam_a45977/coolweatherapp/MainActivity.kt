@@ -10,13 +10,19 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
+
+    private var latitude:Double = 38.74
+    private var longitude:Double = -9.15
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val day = true
+        val currentNightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
+        val day = currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_NO
         when (resources.configuration.orientation) {
             Configuration.ORIENTATION_PORTRAIT ->
                 if(day) setTheme(R.style.Theme_Day)
@@ -31,6 +37,8 @@ class MainActivity : AppCompatActivity() {
 
         setDayNightTheme(day)
         setStatusBarColor(day)
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
     }
 
     private fun setStatusBarColor(day: Boolean) {
