@@ -4,20 +4,20 @@
     <string name="longitude">Longitude</string>
     <string name="latitude">Latitude</string>
     <string name="location">Localização:</string>
-    <string name="temp">0º</string>
+    <string name="temp">0.00º</string>
     <string name="loc_text">(loc default)</string>
     <string name="min_max_text">(min/max)</string>
-    <string name="ts_text">0º</string>
+    <string name="ts_text">00.0º</string>
     <string name="ts_text_title">Sensação:</string>
     <string name="wind_title">Vento</string>
-    <string name="wind_value_text">0</string>
-    <string name="wind_gust_text">0</string>
+    <string name="wind_value_text">00.0</string>
+    <string name="wind_gust_text">00.0</string>
     <string name="km_h">km/h</string>
     <string name="wind">Vento</string>
     <string name="gusts">Rajadas</string>
     <string name="humidity_text">Humidade</string>
-    <string name="humidity_value">0%</string>
+    <string name="humidity_value">00%</string>
     <string name="pressure_text">P. Atmosférica:</string>
-    <string name="pressure_value">0 hPa</string>
+    <string name="pressure_value">0000.0 hPa</string>
     <string name="time_value">12:34</string>
 </resources>
