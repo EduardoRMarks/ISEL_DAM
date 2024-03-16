@@ -49,8 +49,9 @@ class MainActivity : AppCompatActivity() {
             longitude = savedInstanceState.getDouble("longitude", 0.0)
         }
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        fetchWeatherData(latitude.toFloat(), longitude.toFloat())
-
+        if (latitude > -90 && latitude < 90 && longitude > -180 && longitude < 180) {
+            fetchWeatherData(latitude.toFloat(), longitude.toFloat())
+        }
         setContentView(R.layout.activity_main)
 
         val buttonUpdate: Button = findViewById(R.id.update_location)
@@ -58,7 +59,9 @@ class MainActivity : AppCompatActivity() {
         buttonUpdate.setOnClickListener {
             latitude = findViewById<EditText>(R.id.latitude).text.toString().toDouble()
             longitude = findViewById<EditText>(R.id.longitude).text.toString().toDouble()
-            fetchWeatherData(latitude.toFloat(), longitude.toFloat())
+            if (latitude > -90 && latitude < 90 && longitude > -180 && longitude < 180) {
+                fetchWeatherData(latitude.toFloat(), longitude.toFloat())
+            }
         }
 
         setDayNightTheme(day)
