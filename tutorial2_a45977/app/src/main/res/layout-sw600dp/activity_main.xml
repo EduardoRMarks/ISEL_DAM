@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/weatherConstraintLayout"
+        android:id="@+id/layout"
         android:layout_width="910dp"
         android:layout_height="483dp"
         android:layout_marginTop="70dp"
@@ -110,7 +110,7 @@
             android:id="@+id/wind_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="60dp"
             android:text="@string/wind_title"
             android:textSize="55sp"
@@ -122,7 +122,7 @@
             android:id="@+id/wind_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="55dp"
             android:layout_marginTop="15dp"
             android:text="@string/wind_value_text"
             android:textSize="60sp"
@@ -160,7 +160,7 @@
             android:id="@+id/wind_gust_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="40dp"
             android:text="@string/wind_gust_text"
             android:textSize="60sp"
             android:textStyle="bold"
@@ -251,18 +251,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/humidity_title" />
 
-        <TextView
+        <ImageView
             android:id="@+id/wind_dir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/noroeste_ex"
-            android:textSize="34sp"
-            android:textStyle="bold"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.353"
+            app:layout_constraintHorizontal_bias="0.401"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/latitude" />
+            app:layout_constraintTop_toBottomOf="@+id/latitude"
+            app:srcCompat="@drawable/e_day" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -346,7 +345,7 @@
         android:text="@string/time_value"
         android:textSize="62sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/weatherConstraintLayout"
+        app:layout_constraintBottom_toTopOf="@+id/wind_dir"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.17"
         app:layout_constraintStart_toStartOf="parent" />

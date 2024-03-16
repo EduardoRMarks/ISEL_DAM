@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/weatherConstraintLayout"
+        android:id="@+id/layout"
         android:layout_width="300dp"
         android:layout_height="380dp"
         android:layout_marginTop="85dp"
@@ -96,7 +96,7 @@
             android:id="@+id/wind_icon"
             android:layout_width="49dp"
             android:layout_height="46dp"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="28dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/latitude"
@@ -118,7 +118,7 @@
             android:id="@+id/wind_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="35dp"
             android:layout_marginTop="10dp"
             android:text="@string/wind_value_text"
             android:textSize="30sp"
@@ -130,7 +130,7 @@
             android:id="@+id/wind_gust_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
             android:text="@string/wind_gust_text"
             android:textSize="30sp"
@@ -254,19 +254,16 @@
             app:layout_constraintStart_toEndOf="@+id/pressure_title"
             app:layout_constraintTop_toBottomOf="@+id/humidity_icon" />
 
-        <TextView
+        <ImageView
             android:id="@+id/wind_dir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/noroeste_ex"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintHorizontal_bias="0.54"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/latitude" />
+            app:layout_constraintTop_toBottomOf="@+id/latitude"
+            app:srcCompat="@drawable/e_day" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

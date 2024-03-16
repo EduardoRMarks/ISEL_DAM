@@ -27,10 +27,8 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private var latitude:Double = 39.57
-    private var longitude:Double = -9.13
-    //private var latitude:Double = 39.57
-    //private var longitude:Double = -8.00
+    private var latitude:Double = 38.74
+    private var longitude:Double = -9.14
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,18 +86,16 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("ResourceAsColor")
     private fun setDayNightTheme(day: Boolean) {
-        val weatherIcon: ImageView = findViewById(R.id.weather_icon)
         val buttonUpdate: Button = findViewById(R.id.update_location)
         val locationIcon : ImageView = findViewById(R.id.location_icon)
-        val layout: ConstraintLayout = findViewById(R.id.weatherConstraintLayout)
+        val layout: ConstraintLayout = findViewById(R.id.layout)
         val windIcon: ImageView = findViewById(R.id.wind_icon)
         val humidityIcon: ImageView = findViewById(R.id.humidity_icon)
 
         val titles = intArrayOf(R.id.latitude_title, R.id.longitude_title, R.id.thermal_sensation_title,
             R.id.wind_title, R.id.km_h1, R.id.km_h2, R.id.gusts, R.id.wind, R.id.humidity_title, R.id.pressure_title)
         val values = intArrayOf(R.id.latitude, R.id.longitude, R.id.thermal_sensation, R.id.min_max, R.id.temp,
-            R.id.location, R.id.wind_value, R.id.wind_gust_value, R.id.humidity_value, R.id.pressure_value,
-            R.id.time_value, R.id.wind_dir)
+            R.id.location, R.id.wind_value, R.id.wind_gust_value, R.id.humidity_value, R.id.pressure_value, R.id.time_value)
 
 
         if(day) {
@@ -161,33 +157,33 @@ class MainActivity : AppCompatActivity() {
 
             val time: TextView = findViewById(R.id.time_value)
             val weatherIcon: ImageView = findViewById(R.id.weather_icon)
-            val min_max: TextView = findViewById(R.id.min_max)
+            val minMax: TextView = findViewById(R.id.min_max)
             val temperature: TextView = findViewById(R.id.temp)
             val thermalSensation: TextView = findViewById(R.id.thermal_sensation)
             val wind: TextView = findViewById(R.id.wind_value)
-            val wind_gust: TextView = findViewById(R.id.wind_gust_value)
+            val windGust: TextView = findViewById(R.id.wind_gust_value)
             val humidity: TextView = findViewById(R.id.humidity_value)
             val pressure: TextView = findViewById(R.id.pressure_value)
-            val lat_text: TextView = findViewById(R.id.latitude)
-            val long_text: TextView = findViewById(R.id.longitude)
+            val latText: TextView = findViewById(R.id.latitude)
+            val longText: TextView = findViewById(R.id.longitude)
             val location: TextView = findViewById(R.id.location)
-            val wind_dir: TextView = findViewById(R.id.wind_dir)
+            val windDir: ImageView = findViewById(R.id.wind_dir)
 
             val day = request.current.is_day == 1
 
             weatherIcon.setImageResource(resources.getIdentifier(getImage(request.current.weather_code, day), "drawable", packageName))
-            lat_text.text = latitude.toString()
-            long_text.text = longitude.toString()
+            windDir.setImageResource(resources.getIdentifier(degreesToDirection(request.current.wind_direction_10m.toFloat(), day), "drawable", packageName))
+            latText.text = latitude.toString()
+            longText.text = longitude.toString()
             time.text = request.current.time.substring(11)
-            min_max.text = "(" + round(request.daily.temperature_2m_min[0]).toString() + "º/" + round(request.daily.temperature_2m_max[0]).toString() + "º)"
+            minMax.text = "(" + round(request.daily.temperature_2m_min[0]).toString() + "º/" + round(request.daily.temperature_2m_max[0]).toString() + "º)"
             temperature.text = round(request.current.temperature_2m).toString() + "º"
             thermalSensation.text = round(request.current.apparent_temperature).toString() + "º"
-            wind.text = request.current.wind_speed_10m.toString()
-            wind_gust.text = request.current.wind_gusts_10m.toString()
+            wind.text = round(request.current.wind_speed_10m).toString()
+            windGust.text = round(request.current.wind_gusts_10m).toString()
             humidity.text = request.current.relative_humidity_2m.toString() + "%"
             pressure.text = request.current.pressure_msl.toString() + "hPa"
             location.text = getLocationName(request.latitude.toDouble(), request.longitude.toDouble())
-            wind_dir.text = degreesToDirection(request.current.wind_direction_10m.toFloat())
 
             setDayNightTheme(day)
             setStatusBarColor(day)
@@ -222,10 +218,11 @@ class MainActivity : AppCompatActivity() {
         layout.setBackgroundResource(layoutResourceId)
     }
 
-    fun degreesToDirection(degrees: Float): String {
-        val directions = arrayOf("N", "NE", "E", "SE", "S", "SW", "W", "NW", "N")
+    fun degreesToDirection(degrees: Float, day: Boolean): String {
+        val directions = arrayOf("n", "ne", "e", "se", "s", "sw", "w", "nw", "n")
         val index = ((degrees % 360 + 360) % 360 / 45).toInt()
-        return directions[index]
+        return if (day) directions[index] + "_day"
+        else directions[index] + "_night"
     }
 
 
