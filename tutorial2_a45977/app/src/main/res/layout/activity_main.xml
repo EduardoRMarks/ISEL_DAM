@@ -8,14 +8,14 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:id="@+id/weather_icon"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/clear_day" />
+        app:srcCompat="@drawable/weather_unknown_day" />
 
     <Button
         android:id="@+id/update_location"
@@ -31,12 +31,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/weatherConstraintLayout"
         android:layout_width="300dp"
-        android:layout_height="390dp"
-        android:layout_marginTop="75dp"
+        android:layout_height="380dp"
+        android:layout_marginTop="85dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/weather_icon"
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
@@ -194,7 +194,7 @@
             android:id="@+id/humidity_icon"
             android:layout_width="49dp"
             android:layout_height="46dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.12"
             app:layout_constraintStart_toStartOf="parent"
@@ -206,7 +206,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="47dp"
             android:text="@string/humidity_text"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -218,20 +218,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="42dp"
             android:text="@string/humidity_value"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/humidity_title"
-            app:layout_constraintTop_toBottomOf="@+id/gusts" />
+            app:layout_constraintTop_toBottomOf="@+id/wind_title" />
 
         <TextView
             android:id="@+id/pressure_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="25dp"
             android:text="@string/pressure_text"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -245,7 +245,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="25dp"
             android:text="@string/pressure_value"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -253,6 +253,20 @@
             app:layout_constraintHorizontal_bias="0.107"
             app:layout_constraintStart_toEndOf="@+id/pressure_title"
             app:layout_constraintTop_toBottomOf="@+id/humidity_icon" />
+
+        <TextView
+            android:id="@+id/wind_dir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/noroeste_ex"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/latitude" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -266,30 +280,31 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/weather_icon"
         app:layout_constraintTop_toBottomOf="@+id/min_max" />
 
     <ImageView
         android:id="@+id/location_icon"
         android:layout_width="22dp"
         android:layout_height="29dp"
-        android:layout_marginStart="180dp"
         android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temp"
+        app:layout_constraintTop_toBottomOf="@+id/time_value"
         app:srcCompat="@drawable/location_black" />
 
     <TextView
         android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:text="@string/loc_text"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/location_icon"
-        app:layout_constraintTop_toBottomOf="@+id/temp" />
+        app:layout_constraintTop_toBottomOf="@+id/time_value" />
 
     <TextView
         android:id="@+id/min_max"
@@ -300,7 +315,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/weather_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -331,12 +346,12 @@
         android:id="@+id/time_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:text="@string/time_value"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/weather_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

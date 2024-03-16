@@ -13,7 +13,7 @@ data class CurrentWeather (
     var relative_humidity_2m : Int ,
     var apparent_temperature : Float ,
     var precipitation : Float ,
-    var weathercode : Int ,
+    var weather_code : Int ,
     var is_day : Int ,
     var pressure_msl : Double ,
     var wind_speed_10m : Float ,
