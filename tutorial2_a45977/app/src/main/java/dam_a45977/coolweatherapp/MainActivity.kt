@@ -220,7 +220,7 @@ class MainActivity : AppCompatActivity() {
 
     fun degreesToDirection(degrees: Float, day: Boolean): String {
         val directions = arrayOf("s", "sw", "w", "nw", "n", "ne", "e", "se", "s")
-        val index = (((degrees % 360 + 360) +22.5) % 360 / 45).toInt()
+        val index = ((((degrees % 360 + 360)) % 360 + 22.5) / 45).toInt()
         return if (day) directions[index] + "_day"
         else directions[index] + "_night"
     }
