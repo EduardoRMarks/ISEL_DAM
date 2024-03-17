@@ -21,4 +21,5 @@
     <string name="pressure_value">0000.0 hPa</string>
     <string name="time_value">12:34</string>
     <string name="noroeste_ex">NW</string>
+    <string name="loc_atual">Loc. Atual</string>
 </resources>

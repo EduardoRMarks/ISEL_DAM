@@ -1,9 +1,13 @@
 package dam_a45977.coolweatherapp
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.location.Address
 import android.location.Geocoder
+import android.location.Location
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Window
@@ -14,9 +18,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.Task
 import com.google.gson.Gson
 import java.io.IOException
 import java.io.InputStreamReader
@@ -26,9 +33,9 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    private var latitude:Double = 38.74
-    private var longitude:Double = -9.14
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var latitude:Double = 1.0
+    private var longitude:Double = 1.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,17 +51,23 @@ class MainActivity : AppCompatActivity() {
                 else setTheme(R.style.Theme_Night_Land)
         }
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
         if (savedInstanceState != null) {
             latitude = savedInstanceState.getDouble("latitude", 0.0)
             longitude = savedInstanceState.getDouble("longitude", 0.0)
         }
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        else {
+            getLocationAndPermission()
+        }
+
         if (latitude > -90 && latitude < 90 && longitude > -180 && longitude < 180) {
             fetchWeatherData(latitude.toFloat(), longitude.toFloat())
         }
         setContentView(R.layout.activity_main)
 
         val buttonUpdate: Button = findViewById(R.id.update_location)
+        val weather_icon: ImageView = findViewById(R.id.weather_icon)
 
         buttonUpdate.setOnClickListener {
             latitude = findViewById<EditText>(R.id.latitude).text.toString().toDouble()
@@ -64,12 +77,33 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        weather_icon.setOnClickListener {
+            getLocationAndPermission()
+        }
+
         setDayNightTheme(day)
         setStatusBarColor(day)
         //setupUpdateButton()
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
     }
+
+    private fun getLocationAndPermission() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            getLocation()
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
+        }
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         // Save the state of the activity
         outState.putDouble("longitude", longitude)
@@ -244,5 +278,41 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return "Unknown"
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getLocation() {
+        if (Build.MODEL.startsWith("sdk")
+            || "google_sdk".equals(Build.MODEL.toString())
+            || Build.MODEL.contains("Emulator")
+            || Build.MODEL.contains("Android SDK")) {
+            fetchWeatherData(latitude.toFloat(), longitude.toFloat())
+            return
+        }
+
+        //fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
+        //val task: Task<Location> = fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
+
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            location?.let {
+                longitude = location.longitude
+                latitude = location.latitude
+                fetchWeatherData(latitude.toFloat(), longitude.toFloat())
+            }
+        }.addOnFailureListener() {
+            longitude = 3.0
+            latitude = 4.0
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            getLocation()
+        }
+    }
+
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 100
     }
 }
