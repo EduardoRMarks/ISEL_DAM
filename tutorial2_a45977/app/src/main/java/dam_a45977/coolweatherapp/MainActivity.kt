@@ -34,8 +34,8 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var latitude:Double = 1.0
-    private var longitude:Double = 1.0
+    private var latitude:Double = 38.75
+    private var longitude:Double = -9.12
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -290,9 +290,6 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        //fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
-        //val task: Task<Location> = fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
-
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
             location?.let {
                 longitude = location.longitude
@@ -300,8 +297,9 @@ class MainActivity : AppCompatActivity() {
                 fetchWeatherData(latitude.toFloat(), longitude.toFloat())
             }
         }.addOnFailureListener() {
-            longitude = 3.0
-            latitude = 4.0
+            longitude = 38.75
+            latitude = -9.12
+            fetchWeatherData(latitude.toFloat(), longitude.toFloat())
         }
     }
 
