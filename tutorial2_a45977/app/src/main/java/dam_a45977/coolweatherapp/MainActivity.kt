@@ -10,6 +10,7 @@ import android.location.Location
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
@@ -36,12 +37,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var latitude:Double = 38.75
     private var longitude:Double = -9.12
+    private var day: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val currentNightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
-        val day = currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_NO
+        day = currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_NO
         when (resources.configuration.orientation) {
             Configuration.ORIENTATION_PORTRAIT ->
                 if(day) setTheme(R.style.Theme_Day)
@@ -206,7 +208,7 @@ class MainActivity : AppCompatActivity() {
             val location: TextView = findViewById(R.id.location)
             val windDir: ImageView = findViewById(R.id.wind_dir)
 
-            val day = request.current.is_day == 1
+            day = request.current.is_day == 1
 
             weatherIcon.setImageResource(resources.getIdentifier(getImage(request.current.weather_code, day), "drawable", packageName))
             windDir.setImageResource(resources.getIdentifier(degreesToDirection(request.current.wind_direction_10m.toFloat(), day), "drawable", packageName))
@@ -221,6 +223,8 @@ class MainActivity : AppCompatActivity() {
             humidity.text = request.current.relative_humidity_2m.toString() + "%"
             pressure.text = request.current.pressure_msl.toString() + "hPa"
             location.text = getLocationName(request.latitude.toDouble(), request.longitude.toDouble())
+
+            Log.d("aaaaaaaaaaa", request.current.weather_code.toString())
 
             setDayNightTheme(day)
             setStatusBarColor(day)
@@ -286,6 +290,8 @@ class MainActivity : AppCompatActivity() {
             || "google_sdk".equals(Build.MODEL.toString())
             || Build.MODEL.contains("Emulator")
             || Build.MODEL.contains("Android SDK")) {
+            latitude = 38.75
+            longitude = -9.12
             fetchWeatherData(latitude.toFloat(), longitude.toFloat())
             return
         }
