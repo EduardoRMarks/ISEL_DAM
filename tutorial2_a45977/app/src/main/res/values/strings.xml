@@ -22,4 +22,6 @@
     <string name="time_value">12:34</string>
     <string name="noroeste_ex">NW</string>
     <string name="loc_atual">Loc. Atual</string>
+    <string name="lat_val">38.75</string>
+    <string name="long_val">-9.12</string>
 </resources>

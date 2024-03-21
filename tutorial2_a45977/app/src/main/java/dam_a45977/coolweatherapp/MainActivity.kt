@@ -2,15 +2,17 @@ package dam_a45977.coolweatherapp
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
@@ -22,9 +24,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.tasks.Task
 import com.google.gson.Gson
 import java.io.IOException
 import java.io.InputStreamReader
@@ -35,59 +35,74 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var latitude:Double = 38.75
-    private var longitude:Double = -9.12
+    private var latitude: Double = 38.75
+    private var longitude: Double = -9.12
     private var day: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val currentNightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
-        day = currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_NO
-        when (resources.configuration.orientation) {
-            Configuration.ORIENTATION_PORTRAIT ->
-                if(day) setTheme(R.style.Theme_Day)
-                else setTheme(R.style.Theme_Night)
-            Configuration.ORIENTATION_LANDSCAPE ->
-                if(day) setTheme(R.style.Theme_Day_Land)
-                else setTheme(R.style.Theme_Night_Land)
-        }
+        orientationConfig()
+        getLatitudeLongitude(savedInstanceState)
 
+        findWeather()
+        setContentView(R.layout.activity_main)
+
+        updateListener()
+        getCurrentLocationWeather()
+
+        setDayNightTheme(day)
+        setStatusBarColor(day)
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+    }
+
+    private fun getLatitudeLongitude(savedInstanceState: Bundle?) {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         if (savedInstanceState != null) {
             latitude = savedInstanceState.getDouble("latitude", 0.0)
             longitude = savedInstanceState.getDouble("longitude", 0.0)
-        }
-        else {
+        } else {
             getLocationAndPermission()
         }
+    }
 
-        if (latitude > -90 && latitude < 90 && longitude > -180 && longitude < 180) {
-            fetchWeatherData(latitude.toFloat(), longitude.toFloat())
+    private fun orientationConfig() {
+        val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        day = currentNightMode == Configuration.UI_MODE_NIGHT_NO
+        when (resources.configuration.orientation) {
+            Configuration.ORIENTATION_PORTRAIT ->
+                if (day) setTheme(R.style.Theme_Day)
+                else setTheme(R.style.Theme_Night)
+
+            Configuration.ORIENTATION_LANDSCAPE ->
+                if (day) setTheme(R.style.Theme_Day_Land)
+                else setTheme(R.style.Theme_Night_Land)
         }
-        setContentView(R.layout.activity_main)
+    }
 
+    private fun getCurrentLocationWeather() {
+        val weatherIcon: ImageView = findViewById(R.id.weather_icon)
+        weatherIcon.setOnClickListener {
+            getLocationAndPermission()
+        }
+    }
+
+    private fun updateListener() {
         val buttonUpdate: Button = findViewById(R.id.update_location)
-        val weather_icon: ImageView = findViewById(R.id.weather_icon)
 
         buttonUpdate.setOnClickListener {
             latitude = findViewById<EditText>(R.id.latitude).text.toString().toDouble()
             longitude = findViewById<EditText>(R.id.longitude).text.toString().toDouble()
-            if (latitude > -90 && latitude < 90 && longitude > -180 && longitude < 180) {
-                fetchWeatherData(latitude.toFloat(), longitude.toFloat())
-            }
+            findWeather()
         }
+    }
 
-        weather_icon.setOnClickListener {
-            getLocationAndPermission()
+    private fun findWeather() {
+        if (latitude >= -90 && latitude <= 90 && longitude > -180 && longitude < 180) {
+            if (isInternetConnected()) fetchWeatherData(latitude.toFloat(), longitude.toFloat())
         }
-
-        setDayNightTheme(day)
-        setStatusBarColor(day)
-        //setupUpdateButton()
-
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
     }
 
     private fun getLocationAndPermission() {
@@ -107,7 +122,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        // Save the state of the activity
         outState.putDouble("longitude", longitude)
         outState.putDouble("latitude", latitude)
         super.onSaveInstanceState(outState)
@@ -116,7 +130,7 @@ class MainActivity : AppCompatActivity() {
     private fun setStatusBarColor(day: Boolean) {
         val window: Window = window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        if (day){
+        if (day) {
             window.statusBarColor = ContextCompat.getColor(this, R.color.button_light)
         } else {
             window.statusBarColor = ContextCompat.getColor(this, R.color.button_dark)
@@ -126,18 +140,39 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("ResourceAsColor")
     private fun setDayNightTheme(day: Boolean) {
         val buttonUpdate: Button = findViewById(R.id.update_location)
-        val locationIcon : ImageView = findViewById(R.id.location_icon)
+        val locationIcon: ImageView = findViewById(R.id.location_icon)
         val layout: ConstraintLayout = findViewById(R.id.layout)
         val windIcon: ImageView = findViewById(R.id.wind_icon)
         val humidityIcon: ImageView = findViewById(R.id.humidity_icon)
 
-        val titles = intArrayOf(R.id.latitude_title, R.id.longitude_title, R.id.thermal_sensation_title,
-            R.id.wind_title, R.id.km_h1, R.id.km_h2, R.id.gusts, R.id.wind, R.id.humidity_title, R.id.pressure_title)
-        val values = intArrayOf(R.id.latitude, R.id.longitude, R.id.thermal_sensation, R.id.min_max, R.id.temp,
-            R.id.location, R.id.wind_value, R.id.wind_gust_value, R.id.humidity_value, R.id.pressure_value, R.id.time_value)
+        val titles = intArrayOf(
+            R.id.latitude_title,
+            R.id.longitude_title,
+            R.id.thermal_sensation_title,
+            R.id.wind_title,
+            R.id.km_h1,
+            R.id.km_h2,
+            R.id.gusts,
+            R.id.wind,
+            R.id.humidity_title,
+            R.id.pressure_title
+        )
 
+        val values = intArrayOf(
+            R.id.latitude,
+            R.id.longitude,
+            R.id.thermal_sensation,
+            R.id.min_max,
+            R.id.temp,
+            R.id.location,
+            R.id.wind_value,
+            R.id.wind_gust_value,
+            R.id.humidity_value,
+            R.id.pressure_value,
+            R.id.time_value
+        )
 
-        if(day) {
+        if (day) {
             layout.setBackgroundColor(resources.getColor(R.color.background_light))
             buttonUpdate.setBackgroundColor(resources.getColor(R.color.button_light))
             buttonUpdate.setTextColor(resources.getColor(R.color.black))
@@ -168,24 +203,26 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun WeatherAPI_Call(lat: Float, long: Float) : WeatherData {
+    private fun WeatherAPI_Call(lat: Float, long: Float): WeatherData {
         val reqString = buildString {
             append("https://api.open-meteo.com/v1/forecast?")
             append("latitude=${lat}&longitude=${long}&")
-            append("current=temperature_2m,relative_humidity_2m,apparent_temperature," +
-                    "is_day,precipitation,weather_code,pressure_msl,wind_speed_10m," +
-                    "wind_direction_10m,wind_gusts_10m&daily=temperature_2m_max," +
-                    "temperature_2m_min,uv_index_max&timezone=auto")
-    }
+            append(
+                "current=temperature_2m,relative_humidity_2m,apparent_temperature," +
+                        "is_day,weather_code,pressure_msl,wind_speed_10m," +
+                        "wind_direction_10m,wind_gusts_10m&daily=temperature_2m_max," +
+                        "temperature_2m_min&timezone=auto"
+            )
+        }
         val url = URL(reqString)
         url.openStream().use {
-            return Gson().fromJson(InputStreamReader(it,"UTF-8"),WeatherData::class.java)
+            return Gson().fromJson(InputStreamReader(it, "UTF-8"), WeatherData::class.java)
         }
     }
 
     private fun fetchWeatherData(lat: Float, long: Float) {
         return Thread {
-            val weather = WeatherAPI_Call(lat,long)
+            val weather = WeatherAPI_Call(lat, long)
             updateUI(weather)
         }.start()
     }
@@ -210,21 +247,35 @@ class MainActivity : AppCompatActivity() {
 
             day = request.current.is_day == 1
 
-            weatherIcon.setImageResource(resources.getIdentifier(getImage(request.current.weather_code, day), "drawable", packageName))
-            windDir.setImageResource(resources.getIdentifier(degreesToDirection(request.current.wind_direction_10m.toFloat(), day), "drawable", packageName))
+            weatherIcon.setImageResource(
+                resources.getIdentifier(
+                    getImage(
+                        request.current.weather_code,
+                        day
+                    ), "drawable", packageName
+                )
+            )
+            windDir.setImageResource(
+                resources.getIdentifier(
+                    degreesToDirection(
+                        request.current.wind_direction_10m.toFloat(),
+                        day
+                    ), "drawable", packageName
+                )
+            )
             latText.text = latitude.toString()
             longText.text = longitude.toString()
             time.text = request.current.time.substring(11)
-            minMax.text = "(" + round(request.daily.temperature_2m_min[0]).toString() + "º/" + round(request.daily.temperature_2m_max[0]).toString() + "º)"
+            minMax.text =
+                "(" + round(request.daily.temperature_2m_min[0]).toString() + "º/" + round(request.daily.temperature_2m_max[0]).toString() + "º)"
             temperature.text = round(request.current.temperature_2m).toString() + "º"
             thermalSensation.text = round(request.current.apparent_temperature).toString() + "º"
             wind.text = round(request.current.wind_speed_10m).toString()
             windGust.text = round(request.current.wind_gusts_10m).toString()
             humidity.text = request.current.relative_humidity_2m.toString() + "%"
             pressure.text = request.current.pressure_msl.toString() + "hPa"
-            location.text = getLocationName(request.latitude.toDouble(), request.longitude.toDouble())
-
-            Log.d("aaaaaaaaaaa", request.current.weather_code.toString())
+            location.text =
+                getLocationName(request.latitude.toDouble(), request.longitude.toDouble())
 
             setDayNightTheme(day)
             setStatusBarColor(day)
@@ -234,32 +285,32 @@ class MainActivity : AppCompatActivity() {
 
     private fun getImage(code: Int, day: Boolean): String {
         val mapt = getWeatherCodeMap()
-        val mapt_img = mapt[code]?.image
-        if (mapt_img != null) {
-            return if(mapt_img.endsWith("_")){
-                if (day) mapt_img + "day"
-                else mapt_img + "night"
+        val maptImg = mapt[code]?.image
+        return if (maptImg != null) {
+            if (maptImg.endsWith("_")) {
+                if (day) maptImg + "day"
+                else maptImg + "night"
             } else {
-                mapt_img
+                maptImg
             }
-        }
-        else {
-            return if (day) "weather_unknown_day"
+        } else {
+            if (day) "weather_unknown_day"
             else "weather_unknown_night"
         }
     }
 
     private fun setBackgroundImage(day: Boolean) {
         val layout = findViewById<ConstraintLayout>(R.id.container)
-        val layoutResourceId = if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            if (day) R.drawable.daytime_horizontal else R.drawable.nighttime_horizontal
-        } else {
-            if (day) R.drawable.daytime_vertical else R.drawable.nighttime_vertical
-        }
+        val layoutResourceId =
+            if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                if (day) R.drawable.daytime_horizontal else R.drawable.nighttime_horizontal
+            } else {
+                if (day) R.drawable.daytime_vertical else R.drawable.nighttime_vertical
+            }
         layout.setBackgroundResource(layoutResourceId)
     }
 
-    fun degreesToDirection(degrees: Float, day: Boolean): String {
+    private fun degreesToDirection(degrees: Float, day: Boolean): String {
         val directions = arrayOf("s", "sw", "w", "nw", "n", "ne", "e", "se", "s")
         val index = ((((degrees % 360 + 360)) % 360 + 22.5) / 45).toInt()
         return if (day) directions[index] + "_day"
@@ -267,7 +318,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun getLocationName(lat: Double, long: Double): String{
+    private fun getLocationName(lat: Double, long: Double): String {
         if (lat > -90 && lat < 90 && long > -180 && long < 180) {
             val gcd = Geocoder(this, Locale.getDefault())
             var addresses: List<Address>? = null
@@ -289,10 +340,11 @@ class MainActivity : AppCompatActivity() {
         if (Build.MODEL.startsWith("sdk")
             || "google_sdk".equals(Build.MODEL.toString())
             || Build.MODEL.contains("Emulator")
-            || Build.MODEL.contains("Android SDK")) {
+            || Build.MODEL.contains("Android SDK")
+        ) {
             latitude = 38.75
             longitude = -9.12
-            fetchWeatherData(latitude.toFloat(), longitude.toFloat())
+            if (isInternetConnected()) fetchWeatherData(latitude.toFloat(), longitude.toFloat())
             return
         }
 
@@ -300,16 +352,20 @@ class MainActivity : AppCompatActivity() {
             location?.let {
                 longitude = location.longitude
                 latitude = location.latitude
-                fetchWeatherData(latitude.toFloat(), longitude.toFloat())
+                if (isInternetConnected()) fetchWeatherData(latitude.toFloat(), longitude.toFloat())
             }
         }.addOnFailureListener() {
             longitude = 38.75
             latitude = -9.12
-            fetchWeatherData(latitude.toFloat(), longitude.toFloat())
+            if (isInternetConnected()) fetchWeatherData(latitude.toFloat(), longitude.toFloat())
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             getLocation()
@@ -318,5 +374,16 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 100
+    }
+
+    private fun isInternetConnected(): Boolean {
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        val network = connectivityManager.activeNetwork ?: return false
+        val networkCapabilities =
+            connectivityManager.getNetworkCapabilities(network) ?: return false
+
+        return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 }
