@@ -74,9 +74,9 @@ object MockData {
          Pokemon(4,
              "charmander",
              "https://raw.githubusercontent.com/PokeAPI/sprites/master" +
-                     "/sprites/pokemon/other/official-artwork/1.png"
+                     "/sprites/pokemon/other/official-artwork/4.png"
          ),
-         Pokemon(6,
+         Pokemon(7,
              "squirtle",
              "https://raw.githubusercontent.com/PokeAPI/sprites/master" +
                      "/sprites/pokemon/other/official-artwork/7.png",
