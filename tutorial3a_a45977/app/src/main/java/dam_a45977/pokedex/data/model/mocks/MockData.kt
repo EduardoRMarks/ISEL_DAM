@@ -3,7 +3,9 @@ package dam_a45977.pokedex.data.model.mocks
 import dam_a45977.pokedex.R
 import dam_a45977.pokedex.data.model.Pokemon
 import dam_a45977.pokedex.data.model.PokemonDetail
+import dam_a45977.pokedex.data.model.PokemonEvolution
 import dam_a45977.pokedex.data.model.PokemonRegion
+import dam_a45977.pokedex.data.model.PokemonStats
 import dam_a45977.pokedex.data.model.PokemonType
 import kotlin.math.roundToInt
 import kotlin.random.Random
@@ -137,7 +139,7 @@ object MockData {
 
          )
 
-      /*var pokemonDetail = pokemons.map {
+      var pokemonDetail = pokemons.map {
           PokemonDetail(
               it,
               pokemonDetailDescription,
@@ -150,5 +152,5 @@ object MockData {
                       0,"", 0, "")
               }.take(Random.nextInt(1,3)).toList()
           )
-      }*/
+      }
 }

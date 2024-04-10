@@ -5,5 +5,5 @@ class PokemonDetail (var pokemon: Pokemon,
                      var types: List<PokemonType>,
                      var weight: Double,
                      var height: Double,
-                     var stats: Float,
-                     var ability: Float)
+                     var stats: PokemonStats,
+                     var evolution: List<PokemonEvolution>)
