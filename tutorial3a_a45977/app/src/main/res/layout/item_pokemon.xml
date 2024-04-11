@@ -42,7 +42,7 @@
                 android:scaleType="fitCenter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pkID" />
+                app:layout_constraintTop_toBottomOf="@+id/pokemonTypeName" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/pkName"
@@ -60,7 +60,7 @@
                 tools:text="Charmander"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/pkID"
+                android:id="@+id/pokemonTypeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

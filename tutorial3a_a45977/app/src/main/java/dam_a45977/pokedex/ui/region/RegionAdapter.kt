@@ -7,10 +7,11 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import dam_a45977.pokedex.R
 import dam_a45977.pokedex.data.model.PokemonRegion
+import dam_a45977.pokedex.ui.handler.EventClickListener
 
 class RegionAdapter (
     private val pkRegionList: List<PokemonRegion>,
-    private val context: Context
+    private val context: Context,
 ) : RecyclerView.Adapter<RegionAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -33,6 +34,11 @@ class RegionAdapter (
         holder.startersImageView.setImageResource(region.starters)
         holder.regionTitleTextView.text = region.name
         holder.regionSubtitleTextView.text = region.id.toString() + " Generation"
+        holder.itemView.setOnClickListener {
+            val clickListener = context as EventClickListener
+            clickListener.onClicked(region.id)
+        }
+
     }
 
     override fun getItemCount(): Int {

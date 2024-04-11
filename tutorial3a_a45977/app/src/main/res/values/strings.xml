@@ -35,4 +35,10 @@
     <string name="title_spd">Speed</string>
     <string name="title_def">Defence</string>
     <string name="title_atk">Attack</string>
+    <string name="pokemon_detail_number">1234</string>
+    <string name="pokemon_detail_name">Charmander</string>
+    <string name="pokedex_entry">Pokedex Entry</string>
+    <string name="ground">Ground</string>
+    <string name="weight_title">Weight</string>
+    <string name="height_title">Height</string>
 </resources>

@@ -6,14 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".ui.RegionsActivity">
+    tools:context=".ui.RegionsActivity"
+    android:layout_marginTop="30dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/regionsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/item_region" />
+        tools:listitem="@layout/item_region"
+        android:layout_marginBottom="80dp"/>
 
     <include
         android:id="@+id/navigation"
@@ -21,5 +23,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" />
-
 </RelativeLayout>

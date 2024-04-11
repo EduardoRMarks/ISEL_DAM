@@ -5,7 +5,6 @@ import dam_a45977.pokedex.data.model.Pokemon
 import dam_a45977.pokedex.data.model.PokemonDetail
 import dam_a45977.pokedex.data.model.PokemonEvolution
 import dam_a45977.pokedex.data.model.PokemonRegion
-import dam_a45977.pokedex.data.model.PokemonStats
 import dam_a45977.pokedex.data.model.PokemonType
 import kotlin.math.roundToInt
 import kotlin.random.Random
@@ -57,16 +56,16 @@ object MockData {
         PokemonType(18,"steel", R.drawable.steel, R.color.steel)
     )
 
-    /*var pokemons = (1..POKEMONS_SIZE).map {
+    var pokemons = (1..POKEMONS_SIZE).map {
           Pokemon(it,
               "bulbasaur",
               "https://raw.githubusercontent.com/PokeAPI/sprites/master" +
                       "/sprites/pokemon/other/official-artwork/${it}.png",
               regions.random(), pokemonTypeMock.asSequence().shuffled().take(2).toList()
           )
-      }*/
+      }
 
-    var pokemons = listOf(
+    /*var pokemons = listOf(
          Pokemon(1,
              "bulbasaur",
              "https://raw.githubusercontent.com/PokeAPI/sprites/master" +
@@ -138,7 +137,7 @@ object MockData {
 
 
          )
-
+*/
       var pokemonDetail = pokemons.map {
           PokemonDetail(
               it,
@@ -146,11 +145,19 @@ object MockData {
               pokemonTypeMock.asSequence().shuffled().take(1).toList(),
               ( Random.nextDouble(20.0,50.0) * 100.0).roundToInt() / 100.0,
               (Random.nextDouble(0.20, 2.0) * 100.0).roundToInt() / 100.0,
-              PokemonStats(),
-              generateSequence {
-                  PokemonEvolution(1, pokemons.random(), false,
-                      0,"", 0, "")
-              }.take(Random.nextInt(1,3)).toList()
+
           )
       }
+
+    fun getPokemon() : List<Pokemon> {
+        return (1..POKEMONS_SIZE).map {
+            var radom_pokemon = Random.nextInt(1, 1025)
+            Pokemon(radom_pokemon,
+                "bulbasaur",
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master" +
+                        "/sprites/pokemon/other/official-artwork/${radom_pokemon}.png",
+                regions.random(), pokemonTypeMock.asSequence().shuffled().take(2).toList()
+            )
+        }
+    }
 }

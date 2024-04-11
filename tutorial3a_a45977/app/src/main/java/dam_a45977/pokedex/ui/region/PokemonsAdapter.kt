@@ -1,7 +1,6 @@
 package dam_a45977.pokedex.ui.region
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,7 +29,7 @@ class PokemonsAdapter(
         val cardView = itemView.findViewById<CardView>(R.id.cardView)
         val pkImageView = itemView.findViewById<AppCompatImageView>(R.id.pkImage)
         val pkNameTextView = itemView.findViewById<AppCompatTextView>(R.id.pkName)
-        val pkIDTextView = itemView.findViewById<AppCompatTextView>(R.id.pkID)
+        val pkIDTextView = itemView.findViewById<AppCompatTextView>(R.id.pokemonTypeName)
     }
 
 
