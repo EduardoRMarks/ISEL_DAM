@@ -33,6 +33,8 @@
             android:exported="true" />
         <activity android:name=".ui.PokemonListActivity"
             android:exported="true" />
+        <activity android:name=".ui.PokemonDetailActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

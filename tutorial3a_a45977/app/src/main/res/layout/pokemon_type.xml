@@ -10,7 +10,7 @@
     android:focusable="true">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView"
+        android:id="@+id/typeCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
@@ -24,7 +24,7 @@
         tools:cardBackgroundColor="@color/water">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="160dp"
+            android:layout_width="140dp"
             android:layout_height="match_parent"
             android:foreground="?attr/selectableItemBackground"
             app:cardBackgroundColor="@color/white">

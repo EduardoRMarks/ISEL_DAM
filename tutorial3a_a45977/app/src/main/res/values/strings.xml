@@ -41,4 +41,6 @@
     <string name="ground">Ground</string>
     <string name="weight_title">Weight</string>
     <string name="height_title">Height</string>
+    <string name="weight_value">23.45</string>
+    <string name="height_value">12.34</string>
 </resources>

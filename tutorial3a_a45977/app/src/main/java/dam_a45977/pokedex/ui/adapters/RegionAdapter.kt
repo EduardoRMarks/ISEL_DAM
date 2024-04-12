@@ -1,13 +1,14 @@
-package dam_a45977.pokedex.ui.region
+package dam_a45977.pokedex.ui.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.*
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import dam_a45977.pokedex.R
 import dam_a45977.pokedex.data.model.PokemonRegion
-import dam_a45977.pokedex.ui.handler.EventClickListener
+import dam_a45977.pokedex.ui.PokemonListActivity
 
 class RegionAdapter (
     private val pkRegionList: List<PokemonRegion>,
@@ -35,9 +36,11 @@ class RegionAdapter (
         holder.regionTitleTextView.text = region.name
         holder.regionSubtitleTextView.text = region.id.toString() + " Generation"
         holder.itemView.setOnClickListener {
-            val clickListener = context as EventClickListener
-            clickListener.onClicked(region.id)
+            val intent = Intent(context, PokemonListActivity::class.java)
+            intent.putExtra("generation", region.id)
+            context.startActivity(intent)
         }
+
 
     }
 

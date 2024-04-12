@@ -12,6 +12,18 @@ import kotlin.random.Random
 object MockData {
     private val POKEMONS_SIZE = 100
 
+    private var generationPair = arrayOf<Pair<Int, Int>>(
+        Pair(1, 151),
+        Pair(152, 251),
+        Pair(252, 386),
+        Pair(387, 493),
+        Pair(494, 649),
+        Pair(650, 721),
+        Pair(722, 809),
+        Pair(810, 905),
+        Pair(906, 1022),
+    )
+
     private var pokemonDetailDescription: String = "Pokem ipsum dolor " +
             "sit amet Crustle Grotle" +
             " Dragonair Palkia Shellder Terrakion. " +
@@ -33,6 +45,7 @@ object MockData {
         PokemonRegion(6, "Kalos", R.drawable.bg_kalos, R.drawable.pk_kalos),
         PokemonRegion(7, "Alola", R.drawable.bg_alola, R.drawable.pk_alola),
         PokemonRegion(8, "Galar", R.drawable.bg_galar, R.drawable.pk_galar),
+        PokemonRegion(9, "Paldea", R.drawable.bg_paldea, R.drawable.pk_sinnoh),
     )
 
     var pokemonTypeMock= listOf<PokemonType>(
@@ -149,15 +162,27 @@ object MockData {
           )
       }
 
-    fun getPokemon() : List<Pokemon> {
-        return (1..POKEMONS_SIZE).map {
-            var radom_pokemon = Random.nextInt(1, 1025)
-            Pokemon(radom_pokemon,
+    fun getPokemon(generation : Int) : List<Pokemon> {
+        val gen = generationPair[generation-1]
+        return (gen.first..gen.second).map {
+            //var radom_pokemon = Random.nextInt(1, 1025)
+            Pokemon(it,
                 "bulbasaur",
                 "https://raw.githubusercontent.com/PokeAPI/sprites/master" +
-                        "/sprites/pokemon/other/official-artwork/${radom_pokemon}.png",
+                        "/sprites/pokemon/other/official-artwork/${it}.png",
                 regions.random(), pokemonTypeMock.asSequence().shuffled().take(2).toList()
             )
         }
+    }
+
+    fun getDetails(pokemon: Pokemon): PokemonDetail {
+        return PokemonDetail(
+                pokemon,
+                pokemonDetailDescription,
+                pokemonTypeMock.asSequence().shuffled().take(1).toList(),
+                ( Random.nextDouble(20.0,50.0) * 100.0).roundToInt() / 100.0,
+                (Random.nextDouble(0.20, 2.0) * 100.0).roundToInt() / 100.0,
+
+            )
     }
 }

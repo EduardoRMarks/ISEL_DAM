@@ -1,6 +1,7 @@
-package dam_a45977.pokedex.ui.region
+package dam_a45977.pokedex.ui.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,8 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import dam_a45977.pokedex.R
 import dam_a45977.pokedex.data.model.Pokemon
+import dam_a45977.pokedex.data.model.PokemonType
+import dam_a45977.pokedex.ui.PokemonDetailActivity
 
 
 class PokemonsAdapter(
@@ -26,7 +29,7 @@ class PokemonsAdapter(
 ) : RecyclerView.Adapter<PokemonsAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val cardView = itemView.findViewById<CardView>(R.id.cardView)
+        val cardView = itemView.findViewById<CardView>(R.id.pokemonTypeCard)
         val pkImageView = itemView.findViewById<AppCompatImageView>(R.id.pkImage)
         val pkNameTextView = itemView.findViewById<AppCompatTextView>(R.id.pkName)
         val pkIDTextView = itemView.findViewById<AppCompatTextView>(R.id.pokemonTypeName)
@@ -79,6 +82,12 @@ class PokemonsAdapter(
             .into(holder.pkImageView)
         holder.pkNameTextView.text = pokemon.name
         holder.pkIDTextView.text = "#" + pokemon.id
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, PokemonDetailActivity::class.java)
+            intent.putExtra("pokemon", pokemon)
+            context.startActivity(intent)
+        }
+
     }
 
     override fun getItemCount(): Int {
