@@ -8,5 +8,5 @@ data class Pokemon(
     var name: String,
     var imageUrl: String,
     var region : PokemonRegion,
-    var pokemonList: List<PokemonType>
+    var pokemonTypeList: List<PokemonType>
 ): Parcelable

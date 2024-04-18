@@ -19,7 +19,6 @@ import dam_a45977.pokedex.R
 import dam_a45977.pokedex.data.model.Pokemon
 import dam_a45977.pokedex.data.model.mocks.MockData
 import dam_a45977.pokedex.ui.adapters.PokemonDetailAdapter
-import dam_a45977.pokedex.ui.adapters.PokemonsAdapter
 
 class PokemonDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +43,7 @@ class PokemonDetailActivity : AppCompatActivity() {
         pokemon?.let {
             val pokemonDetail = MockData.getDetails(it)
 
-            listView.adapter = PokemonDetailAdapter(typeList = pokemonDetail.pokemon.pokemonList, context = this)
+            listView.adapter = PokemonDetailAdapter(typeList = pokemonDetail.pokemon.pokemonTypeList, context = this)
 
             pokemonName.text = pokemonDetail.pokemon.name
             pokemonNumber.text = "#" + pokemonDetail.pokemon.id
