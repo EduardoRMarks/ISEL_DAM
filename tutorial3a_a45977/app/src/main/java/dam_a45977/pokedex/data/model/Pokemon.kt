@@ -7,6 +7,7 @@ data class Pokemon(
     var id: Int,
     var name: String,
     var imageUrl: String,
-    var region : PokemonRegion,
-    var pokemonTypeList: List<PokemonType>
+    //var region : PokemonRegion,
+    var region: Int,
+    var pokemonTypeList: List<PokemonType>?
 ): Parcelable

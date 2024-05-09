@@ -19,7 +19,10 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import dam_a45977.pokedex.R
 import dam_a45977.pokedex.data.model.Pokemon
+import dam_a45977.pokedex.data.model.PokemonRegion
 import dam_a45977.pokedex.data.model.PokemonType
+import dam_a45977.pokedex.databinding.ItemPokemonBinding
+import dam_a45977.pokedex.databinding.ItemRegionBinding
 import dam_a45977.pokedex.ui.PokemonDetailActivity
 
 
@@ -29,10 +32,10 @@ class PokemonsAdapter(
 ) : RecyclerView.Adapter<PokemonsAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val cardView = itemView.findViewById<CardView>(R.id.pokemonTypeCard)
-        val pkImageView = itemView.findViewById<AppCompatImageView>(R.id.pkImage)
-        val pkNameTextView = itemView.findViewById<AppCompatTextView>(R.id.pkName)
-        val pkIDTextView = itemView.findViewById<AppCompatTextView>(R.id.pokemonTypeName)
+        private val pokemonItemBinding = ItemPokemonBinding.bind(itemView)
+        fun bindView(pokemon: Pokemon) {
+            pokemonItemBinding.pokemon = pokemon
+        }
     }
 
 
@@ -44,6 +47,24 @@ class PokemonsAdapter(
 
     override fun onBindViewHolder(holder: PokemonsAdapter.ViewHolder, position: Int) {
         val pokemon = pokemonList[position]
+
+        holder.bindView(pokemon)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, PokemonDetailActivity::class.java)
+            intent.putExtra("pokemon", pokemon)
+            context.startActivity(intent)
+        }
+
+    }
+
+    override fun getItemCount(): Int {
+        return pokemonList.size
+    }
+}
+
+
+/*
+
         Glide.with(holder.pkImageView.context)
             .asBitmap()
             .load(pokemon.imageUrl)
@@ -82,15 +103,4 @@ class PokemonsAdapter(
             .into(holder.pkImageView)
         holder.pkNameTextView.text = pokemon.name
         holder.pkIDTextView.text = "#" + pokemon.id
-        holder.itemView.setOnClickListener {
-            val intent = Intent(context, PokemonDetailActivity::class.java)
-            intent.putExtra("pokemon", pokemon)
-            context.startActivity(intent)
-        }
-
-    }
-
-    override fun getItemCount(): Int {
-        return pokemonList.size
-    }
-}
+* */

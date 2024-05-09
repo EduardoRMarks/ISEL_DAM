@@ -8,6 +8,8 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import dam_a45977.pokedex.R
 import dam_a45977.pokedex.data.model.PokemonRegion
+import dam_a45977.pokedex.databinding.ItemRegionBinding
+
 import dam_a45977.pokedex.ui.PokemonListActivity
 
 class RegionAdapter (
@@ -16,10 +18,10 @@ class RegionAdapter (
 ) : RecyclerView.Adapter<RegionAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val bgImageView = itemView.findViewById<AppCompatImageView>(R.id.regionBgImage)
-        val startersImageView = itemView.findViewById<AppCompatImageView>(R.id.regionStartersImageView)
-        val regionTitleTextView = itemView.findViewById<AppCompatTextView>(R.id.regionNameTextView)
-        val regionSubtitleTextView = itemView.findViewById<AppCompatTextView>(R.id.regionIdTextView)
+        private val regionItemBinding = ItemRegionBinding.bind(itemView)
+        fun bindView(region: PokemonRegion) {
+            regionItemBinding.region = region
+        }
     }
 
 
@@ -31,17 +33,12 @@ class RegionAdapter (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val region = pkRegionList[position]
-        holder.bgImageView.setImageResource(region.bg)
-        holder.startersImageView.setImageResource(region.starters)
-        holder.regionTitleTextView.text = region.name
-        holder.regionSubtitleTextView.text = region.id.toString() + " Generation"
+        holder.bindView(region)
         holder.itemView.setOnClickListener {
             val intent = Intent(context, PokemonListActivity::class.java)
             intent.putExtra("generation", region.id)
             context.startActivity(intent)
         }
-
-
     }
 
     override fun getItemCount(): Int {

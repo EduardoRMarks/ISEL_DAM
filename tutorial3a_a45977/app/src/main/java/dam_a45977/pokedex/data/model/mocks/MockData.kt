@@ -3,7 +3,6 @@ package dam_a45977.pokedex.data.model.mocks
 import dam_a45977.pokedex.R
 import dam_a45977.pokedex.data.model.Pokemon
 import dam_a45977.pokedex.data.model.PokemonDetail
-import dam_a45977.pokedex.data.model.PokemonEvolution
 import dam_a45977.pokedex.data.model.PokemonRegion
 import dam_a45977.pokedex.data.model.PokemonType
 import kotlin.math.roundToInt
@@ -38,14 +37,14 @@ object MockData {
 
     var regions = listOf<PokemonRegion>(
         PokemonRegion(1, "Kanto", R.drawable.bg_kanto, R.drawable.pk_kanto),
-        PokemonRegion(2, "Johto", R.drawable.bg_johto, R.drawable.pk_johto),
-        PokemonRegion(3, "Hoenn", R.drawable.bg_hoenn, R.drawable.pk_hoenn),
+        PokemonRegion(2, "Kanto", R.drawable.bg_johto, R.drawable.pk_johto),
+        PokemonRegion(3, "Kanto", R.drawable.bg_hoenn, R.drawable.pk_hoenn),
         PokemonRegion(4, "Sinnoh", R.drawable.bg_sinnoh, R.drawable.pk_sinnoh),
         PokemonRegion(5, "Unova", R.drawable.bg_unova, R.drawable.pk_unova),
         PokemonRegion(6, "Kalos", R.drawable.bg_kalos, R.drawable.pk_kalos),
         PokemonRegion(7, "Alola", R.drawable.bg_alola, R.drawable.pk_alola),
         PokemonRegion(8, "Galar", R.drawable.bg_galar, R.drawable.pk_galar),
-        PokemonRegion(9, "Paldea", R.drawable.bg_paldea, R.drawable.pk_sinnoh),
+        PokemonRegion(9, "Paldea", R.drawable.bg_paldea, R.drawable.pk_paldea),
     )
 
     var pokemonTypeMock= listOf<PokemonType>(
@@ -74,7 +73,7 @@ object MockData {
               "bulbasaur",
               "https://raw.githubusercontent.com/PokeAPI/sprites/master" +
                       "/sprites/pokemon/other/official-artwork/${it}.png",
-              regions.random(), pokemonTypeMock.asSequence().shuffled().take(5).toList()
+              1, pokemonTypeMock.asSequence().shuffled().take(5).toList()
           )
       }
 
@@ -169,16 +168,20 @@ object MockData {
                 "bulbasaur",
                 "https://raw.githubusercontent.com/PokeAPI/sprites/master" +
                         "/sprites/pokemon/other/official-artwork/${it}.png",
-                regions.random(), pokemonTypeMock.asSequence().shuffled().take(2).toList()
+                generation, pokemonTypeMock.asSequence().shuffled().take(2).toList()
             )
         }
+    }
+
+    fun getTypes() : List<PokemonType>{
+        return pokemonTypeMock.asSequence().shuffled().take(2).toList()
     }
 
     fun getDetails(pokemon: Pokemon): PokemonDetail {
         return PokemonDetail(
                 pokemon,
                 pokemonDetailDescription,
-                ( Random.nextDouble(20.0,50.0) * 100.0).roundToInt() / 100.0,
+                (Random.nextDouble(20.0,50.0) * 100.0).roundToInt() / 100.0,
                 (Random.nextDouble(0.20, 2.0) * 100.0).roundToInt() / 100.0,
 
             )

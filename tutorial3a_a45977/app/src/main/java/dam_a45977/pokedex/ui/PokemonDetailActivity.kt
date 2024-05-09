@@ -1,31 +1,46 @@
 package dam_a45977.pokedex.ui
 
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.palette.graphics.Palette
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import dam_a45977.pokedex.R
 import dam_a45977.pokedex.data.model.Pokemon
-import dam_a45977.pokedex.data.model.mocks.MockData
+import dam_a45977.pokedex.databinding.ActivityPokemonDetailBinding
 import dam_a45977.pokedex.ui.adapters.PokemonDetailAdapter
+import dam_a45977.pokedex.ui.viewModel.PokemonDetailsViewModel
 
 class PokemonDetailActivity : AppCompatActivity() {
+
+    val viewModel: PokemonDetailsViewModel by viewModels()
+    private lateinit var binding : ViewDataBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pokemon_detail)
+        //setContentView(R.layout.activity_pokemon_detail)
         enableEdgeToEdge()
+        this.binding = DataBindingUtil.setContentView(this, R.layout.activity_pokemon_detail)
+        val pokemonDetailBinding = binding as ActivityPokemonDetailBinding
+        var listView = pokemonDetailBinding.typesRecyclerView
 
+        val pokemon = intent.getParcelableExtra<Pokemon>("pokemon")
+
+        viewModel.pokemonDetails.observe(this) {
+            if (it != null) {
+                pokemonDetailBinding.pokemonDetails = it
+                listView.adapter =
+                    it.pokemon.pokemonTypeList?.let { it1 -> PokemonDetailAdapter(it1, this) }
+            }
+        }
+
+
+        if (pokemon != null) {
+            viewModel.fetchPokemonDetails(pokemon)
+        }
+
+
+        /*
         val pokemon = intent.getParcelableExtra<Pokemon>("pokemon")
 
         val pokemonDetailBackgroundCard = findViewById<CardView>(R.id.pokemonDetailBackgroundCard)
@@ -43,7 +58,7 @@ class PokemonDetailActivity : AppCompatActivity() {
         pokemon?.let {
             val pokemonDetail = MockData.getDetails(it)
 
-            listView.adapter = PokemonDetailAdapter(typeList = pokemonDetail.pokemon.pokemonTypeList, context = this)
+            listView.adapter = pokemonDetail.pokemon.pokemonTypeList?.let { it1 -> PokemonDetailAdapter(typeList = it1, context = this) }
 
             pokemonName.text = pokemonDetail.pokemon.name
             pokemonNumber.text = "#" + pokemonDetail.pokemon.id
@@ -88,6 +103,6 @@ class PokemonDetailActivity : AppCompatActivity() {
             pokedexEntry.text = pokemonDetail.description
             weightValue.text = pokemonDetail.weight.toString()
             heightValue.text = pokemonDetail.height.toString()
-        }
+        }*/
     }
 }

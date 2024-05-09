@@ -41,8 +41,8 @@
     <string name="ground">Ground</string>
     <string name="weight_title">Weight</string>
     <string name="height_title">Height</string>
-    <string name="weight_value">23.45</string>
-    <string name="height_value">12.34</string>
+    <string name="weight_value">%.2f</string>
+    <string name="height_value">%.2f</string>
     <string name="pokedex_title">Pokedex A45977</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
