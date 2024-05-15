@@ -39,10 +39,12 @@ data class PokemonGenericResponse(
 
 @JsonClass(generateAdapter = true)
 data class PokemonDetailResponse(
-    @field:Json(name = "id") val id: Int?,
-    @field:Json(name = "name") val name: String?,
-    @field:Json(name = "height") val height: Int?,
-    @field:Json(name = "weight") val weight: Int?,
-    @field:Json(name = "types") val types: List<PokemonType>?,
-    //@field:Json(name = "sprites") val sprites: PokemonSpritesResponse?,
+    val details: PokemonDet
+)
+
+@JsonClass(generateAdapter = true)
+data class PokemonDet(
+    val id: Int,
+    val name: String,
+    // Add other properties as needed
 )

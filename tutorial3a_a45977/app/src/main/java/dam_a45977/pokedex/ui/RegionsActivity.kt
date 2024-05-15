@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import dam_a45977.pokedex.R
+import dam_a45977.pokedex.data.model.database.DBModule
 import dam_a45977.pokedex.data.model.mocks.MockData
 import dam_a45977.pokedex.databinding.ActivityRegionsBinding
 import dam_a45977.pokedex.ui.adapters.RegionAdapter
@@ -20,6 +21,8 @@ class RegionsActivity : BottomNavActivity() {
 
         val regionBinding = binding as ActivityRegionsBinding
         var listView = regionBinding.regionsRecyclerView
+
+        viewModel.initViewMode(DBModule.getInstance(this).regionRepository)
 
         viewModel.regions.observe(this) {
             listView.adapter =

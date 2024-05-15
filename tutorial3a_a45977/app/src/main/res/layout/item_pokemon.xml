@@ -11,10 +11,6 @@
             name="pokemon"
             type="dam_a45977.pokedex.data.model.Pokemon" />
 
-        <variable
-            name="pokemonType"
-            type="dam_a45977.pokedex.data.model.PokemonType" />
-
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat

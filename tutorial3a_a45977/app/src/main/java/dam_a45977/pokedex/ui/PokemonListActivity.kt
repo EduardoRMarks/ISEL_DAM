@@ -10,6 +10,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import dam_a45977.pokedex.R
 import dam_a45977.pokedex.data.model.Pokemon
+import dam_a45977.pokedex.data.model.database.DBModule
 import dam_a45977.pokedex.data.model.mocks.MockData
 import dam_a45977.pokedex.databinding.ActivityPokemonlistBinding
 import dam_a45977.pokedex.databinding.ActivityRegionsBinding
@@ -28,12 +29,15 @@ class PokemonListActivity : AppCompatActivity() {
         this.binding = DataBindingUtil.setContentView(this, R.layout.activity_pokemonlist)
         val pokemonListBinding = binding as ActivityPokemonlistBinding
 
+        viewModel.initViewMode(DBModule.getInstance(this).pokemonRepository)
+
         val generation = intent.getIntExtra("generation", 1)
-        viewModel.fetchPokemons(generation)
 
         viewModel.pokemonList.observe(this) {
             pokemonListBinding.pksRecyclerView2.adapter =
                 viewModel.pokemonList.value?.let { it1 -> PokemonsAdapter(pokemonList = it1, context = this) }
         }
+
+        viewModel.fetchPokemons(generation)
     }
 }

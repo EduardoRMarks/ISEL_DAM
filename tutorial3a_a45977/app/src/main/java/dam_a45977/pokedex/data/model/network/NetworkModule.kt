@@ -48,4 +48,5 @@ internal object NetworkModule {
         val pokemonApi = providePokedexService(retrofit)
         return pokemonApi
     }
+
 }

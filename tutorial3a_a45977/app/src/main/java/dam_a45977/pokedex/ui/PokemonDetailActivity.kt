@@ -29,8 +29,8 @@ class PokemonDetailActivity : AppCompatActivity() {
         viewModel.pokemonDetails.observe(this) {
             if (it != null) {
                 pokemonDetailBinding.pokemonDetails = it
-                listView.adapter =
-                    it.pokemon.pokemonTypeList?.let { it1 -> PokemonDetailAdapter(it1, this) }
+                listView.adapter = it.types?.let { it1 -> PokemonDetailAdapter(it1, this) }
+                    //it.pokemonDe.pokemonTypeList?.let { it1 -> PokemonDetailAdapter(it1, this) }
             }
         }
 

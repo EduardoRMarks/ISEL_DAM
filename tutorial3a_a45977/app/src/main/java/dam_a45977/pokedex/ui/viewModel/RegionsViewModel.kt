@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dam_a45977.pokedex.data.model.PokemonRegion
 import dam_a45977.pokedex.data.model.mocks.MockData
 import dam_a45977.pokedex.data.model.network.NetworkModule
+import dam_a45977.pokedex.data.model.repositories.RegionRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -15,26 +16,16 @@ class RegionsViewModel : ViewModel() {
     val regions: LiveData<List<PokemonRegion>?>
         get() = _regions
 
+    private lateinit var _repository: RegionRepository
+    fun initViewMode(repository: RegionRepository) {
+        _repository = repository
+    }
+
     fun fetchRegions() {
         //_regions.value = MockData.regions
-
         viewModelScope.launch(Dispatchers.Default) {
-            val response = NetworkModule.client.fetchRegionList()
-
-            val regionsList = response.results?.map {
-                val regexToGetId = "/([^/]+)/?\$".toRegex()
-
-                var regionId = regexToGetId.find(it.url!!)?.value
-                regionId = regionId?.removeSurrounding("/")
-
-                PokemonRegion(regionId?.toInt() ?: 0, it.name?.capitalize().toString(), 0, 0)
-            }
-
-            val newList = regionsList?.toMutableList()
-            newList?.removeIf{ it.id == 9 }
-            newList?.find { it.name == "Paldea" }?.id = 9
-
-            _regions.postValue(newList)
+            val regionsList = _repository.getRegions()
+            _regions.postValue(regionsList.value)
         }
     }
 }

@@ -73,7 +73,7 @@ object MockData {
               "bulbasaur",
               "https://raw.githubusercontent.com/PokeAPI/sprites/master" +
                       "/sprites/pokemon/other/official-artwork/${it}.png",
-              1, pokemonTypeMock.asSequence().shuffled().take(5).toList()
+              1
           )
       }
 
@@ -156,7 +156,7 @@ object MockData {
               pokemonDetailDescription,
               ( Random.nextDouble(20.0,50.0) * 100.0).roundToInt() / 100.0,
               (Random.nextDouble(0.20, 2.0) * 100.0).roundToInt() / 100.0,
-
+              null
           )
       }
 
@@ -168,7 +168,7 @@ object MockData {
                 "bulbasaur",
                 "https://raw.githubusercontent.com/PokeAPI/sprites/master" +
                         "/sprites/pokemon/other/official-artwork/${it}.png",
-                generation, pokemonTypeMock.asSequence().shuffled().take(2).toList()
+                generation
             )
         }
     }
@@ -183,7 +183,7 @@ object MockData {
                 pokemonDetailDescription,
                 (Random.nextDouble(20.0,50.0) * 100.0).roundToInt() / 100.0,
                 (Random.nextDouble(0.20, 2.0) * 100.0).roundToInt() / 100.0,
-
+                null
             )
     }
 }
