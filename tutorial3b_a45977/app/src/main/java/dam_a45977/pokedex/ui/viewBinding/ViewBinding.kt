@@ -26,7 +26,6 @@ object ViewBinding {
     }
 
 
-
     @JvmStatic
     @BindingAdapter("android:src", "isToSetBackground")
     fun setRegionImage(imageView: AppCompatImageView, regionName: String, isToSetBackground: Boolean) {
