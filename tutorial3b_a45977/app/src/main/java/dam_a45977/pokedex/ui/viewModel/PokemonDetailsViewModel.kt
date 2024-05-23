@@ -23,7 +23,5 @@ class PokemonDetailsViewModel : ViewModel() {
         val pokemonDet = dam_a45977.pokedex.data.model.mocks.MockData.getDetails(pokemon)
         pokemonDet.types = dam_a45977.pokedex.data.model.mocks.MockData.getTypes()
         _pokemonDetails.postValue(pokemonDet)
-
-
     }
 }

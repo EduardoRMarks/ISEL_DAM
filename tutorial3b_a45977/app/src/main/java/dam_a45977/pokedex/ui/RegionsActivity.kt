@@ -9,6 +9,7 @@ import dam_a45977.pokedex.R
 import dam_a45977.pokedex.data.model.database.DBModule
 import dam_a45977.pokedex.data.model.mocks.MockData
 import dam_a45977.pokedex.databinding.ActivityRegionsBinding
+
 import dam_a45977.pokedex.ui.adapters.RegionAdapter
 import dam_a45977.pokedex.ui.viewModel.RegionsViewModel
 
