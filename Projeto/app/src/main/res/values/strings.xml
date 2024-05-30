@@ -5,4 +5,12 @@
     <string name="search">Search</string>
     <string name="user">User</string>
     <string name="user_name_home">Hi user @name_of_user</string>
+    <string name="search_value" />
+    <string name="search_button">Search</string>
+    <string name="search_title">Search</string>
+    <string-array name="search_options">
+        <item>Title</item>
+        <item>ISBN</item>
+        <item>Author</item>
+    </string-array>
 </resources>
