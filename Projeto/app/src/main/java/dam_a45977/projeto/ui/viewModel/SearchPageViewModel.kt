@@ -44,7 +44,9 @@ class SearchPageViewModel : ViewModel(){
                             val bookId = regexToGetId.find(it.title!!)?.value
                             val bookCover =
                                 "https://covers.openlibrary.org/b/olid/${it.cover}-M.jpg"
-                            Book(it.title, it.author, it.isbn, bookCover, it.numberOfPages)
+                            Book(it.title, it.author, it.isbn, bookCover,
+                                it.numberOfPages.toString()
+                            )
                         }
 
                     _books.postValue(booksList)
@@ -56,8 +58,6 @@ class SearchPageViewModel : ViewModel(){
     }
 
     fun fetchRandomBooks(){
-        val randomBooks = mutableListOf<Book>()
-
         val authors = arrayOf("J. K. Rowling", "Zadie Smith", "Stephen King", "George R. R. Martin", "Haruki Murakami", "Margaret Atwood", "Neil Gaiman", "Philip Pullman", "Terry Pr")
         var author = authors.random()
         author = author.replace(" ", "+")
@@ -73,7 +73,7 @@ class SearchPageViewModel : ViewModel(){
                         val bookId = regexToGetId.find(it.title!!)?.value
                         val bookCover =
                             "https://covers.openlibrary.org/b/olid/${it.cover}-M.jpg"
-                        Book(it.title, it.author, it.isbn, bookCover, it.numberOfPages)
+                        Book(it.title, it.author, it.isbn, bookCover, it.numberOfPages.toString())
                     }
 
                 _books.postValue(booksList)

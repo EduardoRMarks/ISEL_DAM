@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "286489087062",
+    "project_id": "prjdam45977",
+    "storage_bucket": "prjdam45977.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286489087062:android:cde5f2eee733a096423ff7",
+        "android_client_info": {
+          "package_name": "dam_a45977.projeto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrLo2PtaLUtoRl4FSsWK7RriXGRkkoktk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

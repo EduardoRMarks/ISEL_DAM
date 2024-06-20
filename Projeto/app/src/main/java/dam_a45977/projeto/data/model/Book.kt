@@ -9,7 +9,7 @@ data class Book(
     val authorName: List<String>?,
     val isbn: List<String>?,
     var bookCover: String?,
-    var numberOfPages: Int?,
+    var numberOfPages: String?,
 //    var genre: String,
 //    var year: Int,
 //    var rating: Float,

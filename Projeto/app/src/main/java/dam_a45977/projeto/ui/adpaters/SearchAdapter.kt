@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dam_a45977.projeto.R
 import dam_a45977.projeto.data.model.Book
 import dam_a45977.projeto.databinding.ItemBookBinding
+import dam_a45977.projeto.ui.BookActivity
 import dam_a45977.projeto.ui.SearchActivity
 
 class SearchAdapter (
@@ -36,7 +37,7 @@ class SearchAdapter (
         val book = bookList[position]
         holder.bindView(book)
         holder.itemView.setOnClickListener {
-            val intent = Intent(context, SearchActivity::class.java)
+            val intent = Intent(context, BookActivity::class.java)
             intent.putExtra("isbn", book.isbn?.get(0))
             context.startActivity(intent)
         }

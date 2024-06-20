@@ -27,7 +27,7 @@ class PokemonDetailActivity : AppCompatActivity() {
         val pokemon = intent.getParcelableExtra<Pokemon>("pokemon")
 
         viewModel.pokemonDetails.observe(this) {
-            if (it != null) {
+            if (it != null)    {
                 pokemonDetailBinding.pokemonDetails = it
                 listView.adapter = it.types?.let { it1 -> PokemonDetailAdapter(it1, this) }
                     //it.pokemonDe.pokemonTypeList?.let { it1 -> PokemonDetailAdapter(it1, this) }

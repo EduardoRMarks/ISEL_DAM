@@ -8,6 +8,14 @@
     <string name="search_value" />
     <string name="search_button">Search</string>
     <string name="search_title">Search</string>
+    <string name="pages_number">1234</string>
+    <string name="isbn_number">123456789123</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="final_project">Final Project</string>
+    <string name="login_button">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create">Create</string>
     <string-array name="search_options">
         <item>Title</item>
         <item>ISBN</item>
