@@ -43,9 +43,10 @@ class SearchPageViewModel : ViewModel(){
                             val bookId = regexToGetId.find(it.title!!)?.value
                             val bookCover =
                                 "https://covers.openlibrary.org/b/olid/${it.cover}-M.jpg"
-                            Book(it.title, it.author, it.isbn, bookCover,
-                                it.numberOfPages.toString()
-                            )
+                            if (searchType == "ISBN")
+                                Book(it.title, it.author, listOf(searchValue), bookCover, it.numberOfPages.toString())
+                            else
+                                Book(it.title, it.author, it.isbn, bookCover, it.numberOfPages.toString())
                         }
 
                     _books.postValue(booksList)
