@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.CollectionListActivity">
+
+    <data>
+        <variable
+            name="book"
+            type="dam_a45977.projeto.data.model.BookInList" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bookCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:padding="0dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="@color/brown">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/bookCover"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="5dp"
+            android:contentDescription="@string/app_name"
+            android:layout_gravity="center|top"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:paletteImage="@{book.bookCover}"
+            app:paletteView="@{bookCard}" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bookTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="105dp"
+            android:layout_gravity="center|top"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            tools:text="@{book.title}" />
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>

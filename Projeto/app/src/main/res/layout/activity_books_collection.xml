@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
-    tools:context=".ui.SearchActivity"
+    tools:context=".ui.CollectionListActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
@@ -11,12 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include
-            android:id="@+id/navigation"
-            layout="@layout/bottomnavigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayoutPageTitle"
@@ -24,72 +18,39 @@
             android:layout_height="80dp">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/collectionName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
-                android:text="@string/search_title"
+                android:text="collectionName"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.056"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.666" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayoutSearch"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_below="@+id/constraintLayoutPageTitle">
-
-            <EditText
-                android:id="@+id/searchText"
-                android:layout_width="250dp"
-                android:layout_height="41dp"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/search_value"
-                android:inputType="text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.27" />
-
-            <Spinner
-                android:id="@+id/searchTypeSpinner"
-                android:layout_width="120dp"
-                android:layout_height="26dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.04"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchText"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.666" />
 
             <Button
-                android:id="@+id/searchButton"
+                android:id="@+id/deleteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:backgroundTint="@color/brown"
-                android:text="@string/search_button"
+                android:text="@string/delete"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/searchText"
+                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintStart_toEndOf="@+id/collectionName"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.38" />
-
+                app:layout_constraintVertical_bias="0.66" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
-            android:layout_height="520dp"
-            android:layout_below="@+id/constraintLayoutSearch"
+            android:layout_height="720dp"
+            android:layout_below="@+id/constraintLayoutPageTitle"
             android:layout_marginTop="10dp">
 
 

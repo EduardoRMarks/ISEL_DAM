@@ -42,6 +42,10 @@
             android:exported="true" />
         <activity android:name=".ui.BookActivity"
             android:exported="true" />
+        <activity android:name=".ui.NewCollectionActivity"
+            android:exported="true" />
+        <activity android:name=".ui.CollectionListActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

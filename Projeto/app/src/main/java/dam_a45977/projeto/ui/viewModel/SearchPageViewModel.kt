@@ -15,8 +15,7 @@ import retrofit2.Call
 class SearchPageViewModel : ViewModel(){
 
     private val _books = MutableLiveData<List<Book>?>()
-    val books: LiveData<List<Book>?>
-        get() = _books
+    val books: LiveData<List<Book>?> get() = _books
 
     fun fetchBooks(searchType: String, searchValue: String) {
 

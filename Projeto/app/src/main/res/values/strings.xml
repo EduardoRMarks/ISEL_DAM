@@ -16,6 +16,9 @@
     <string name="login_button">Login</string>
     <string name="sign_up">Sign Up</string>
     <string name="create">Create</string>
+    <string name="newColl">New</string>
+    <string name="delete">Delete</string>
+    <string name="logout">LogOut</string>
     <string-array name="search_options">
         <item>Title</item>
         <item>ISBN</item>

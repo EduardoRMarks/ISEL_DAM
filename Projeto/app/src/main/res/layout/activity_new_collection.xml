@@ -4,21 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".ui.LoginActivity">
+    tools:context=".ui.NewCollectionActivity">
 
     <data>
         <variable
             name="viewModel"
-            type="dam_a45977.projeto.ui.viewModel.LoginViewModel" />
+            type="dam_a45977.projeto.ui.viewModel.NewCollectionViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.cardview.widget.CardView
-            android:id="@+id/pokemonDetailBackgroundCard"
+            android:id="@+id/PokemonRegisterBackgroundCard"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="-30dp"
@@ -39,7 +38,7 @@
                 android:layout_marginTop="80dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/book_solid" />
+                app:srcCompat="@drawable/ic_shelf" />
 
             <TextView
                 android:id="@+id/pokedexTitle"
@@ -48,7 +47,7 @@
                 android:layout_marginStart="145dp"
                 android:layout_marginTop="115dp"
                 android:fontFamily="@font/poppins"
-                android:text="@string/final_project"
+                android:text="New Collection"
                 android:textSize="27sp"
                 android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
@@ -62,107 +61,69 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/firstNameTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="300dp"
                 android:fontFamily="@font/poppins"
-                android:text="Login"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/emailLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="43dp"
-                android:ems="10"
-                android:hint="Email"
-                android:text="@={viewModel.email}"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.39"
-                app:layout_constraintStart_toEndOf="@+id/emailTitle"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-            <TextView
-                android:id="@+id/emailTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="52dp"
-                android:layout_marginTop="50dp"
-                android:fontFamily="@font/poppins"
-                android:text="@string/email"
+                android:text="Collection Name"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-
-            <TextView
-                android:id="@+id/passwordTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/poppins"
-                android:text="@string/password"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailLogin" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.408" />
 
             <EditText
-                android:id="@+id/loginPassword"
+                android:id="@+id/firstName"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:ems="10"
-                android:inputType="textPassword"
-                android:hint="Password"
-                android:text="@={viewModel.password}"
+                android:inputType="text"
+                android:text="@={viewModel.collectionName}"
                 android:textAlignment="center"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/passwordTitle"
-                app:layout_constraintTop_toBottomOf="@+id/emailLogin" />
-
-            <Switch
-                android:id="@+id/showHidePassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="33dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.39"
-                app:layout_constraintStart_toEndOf="@+id/loginPassword"
-                app:layout_constraintTop_toBottomOf="@+id/emailLogin"
-                tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-            <Button
-                android:id="@+id/loginButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:backgroundTint="@color/brown"
-                android:text="@string/login_button"
-                android:onClick="@{() -> viewModel.login()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/firstNameTitle" />
 
-            <Button
-                android:id="@+id/newAccountButton"
+            <TextView
+                android:id="@+id/lastNameTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:backgroundTint="@color/brown"
-                android:text="@string/sign_up"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins"
+                android:text="Genre"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+                app:layout_constraintTop_toBottomOf="@+id/firstName" />
+
+            <EditText
+                android:id="@+id/LastName"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:inputType="text"
+                android:text="@={viewModel.collectionGenre}"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lastNameTitle" />
+
+            <Button
+                android:id="@+id/registerAccountButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/brown"
+                android:onClick="@{() -> viewModel.createCollection()}"
+                android:text="@string/create"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LastName" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
